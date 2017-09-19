@@ -8,7 +8,7 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     
     SECRET_KEY = 'you will never know'
-    MAIL_SERVER = 'mail.sap.corp'
+    MAIL_SERVER = 'mail server'
     MAIL_USE_TLS = True
 
     @staticmethod
