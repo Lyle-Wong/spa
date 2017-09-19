@@ -1,9 +1,12 @@
 # -*- coding=utf-8 -*-
 
 from flask import Flask
+from flask_pymongo import PyMongo
 
 from config import config
 
+
+pymongo = PyMongo()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -18,6 +21,8 @@ def create_app(config_name):
         response.headers.add('Access-Control-Allow-Methods',
                              'GET,PUT,POST,DELETE')
         return response
+
+    pymongo.init_app(app)
 
     from .main import main as main_blueprint
 
