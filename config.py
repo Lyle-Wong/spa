@@ -11,14 +11,14 @@ class Config(object):
     MONGODB_HOST = '127.0.0.1'
     MONGODB_DB = 'spa'
     MONGODB_PORT = 27017
-    MONGODB_USERNAME = 'lwang'
-    MONGODB_PASSWORD = 'password'
+    # MONGODB_USERNAME = 'lwang'
+    # MONGODB_PASSWORD = 'password'
 
     SECRET_KEY = 'you will never know'
     MAIL_SERVER = 'mail server'
     MAIL_USE_TLS = True
 
-    TOKEN_EXPERION = 600
+    TOKEN_EXPIRATION = 600
 
     @staticmethod
     def init_app(app):

@@ -9,7 +9,7 @@ from config import config
 
 debugtool = DebugToolbarExtension()
 mongo = MongoEngine()
-basic_auth = HTTPBasicAuth()
+http_auth = HTTPBasicAuth()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -29,6 +29,8 @@ def create_app(config_name):
     mongo.init_app(app)
 
     from .main import main as main_blueprint
+    from .auth import auth as auth_blueprint
 
     app.register_blueprint(main_blueprint, url_prefix='/')
+    app.register_blueprint(auth_blueprint, url_prefix='/api/auth')
     return app
