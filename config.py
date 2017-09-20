@@ -7,15 +7,18 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     """config file"""
-    MONGO_URI = 'mongodb://admin:password@localhost'
-    MONGO_HOST = 'localhost'
-    MONGO_DBNAME = 'spa'
-    MONGO_USERNAME = 'admin'
-    MONGO_PASSWORD = 'password'
+    # MONGODB_URI = 'mongodb://admin:password@127.0.0.1:27017/spa'
+    MONGODB_HOST = '127.0.0.1'
+    MONGODB_DB = 'spa'
+    MONGODB_PORT = 27017
+    MONGODB_USERNAME = 'lwang'
+    MONGODB_PASSWORD = 'password'
 
     SECRET_KEY = 'you will never know'
     MAIL_SERVER = 'mail server'
     MAIL_USE_TLS = True
+
+    TOKEN_EXPERION = 600
 
     @staticmethod
     def init_app(app):

@@ -1,12 +1,15 @@
 # -*- coding=utf-8 -*-
 
 from flask import Flask
-from flask_pymongo import PyMongo
-
+from flask_mongoengine import MongoEngine
+from flask_debugtoolbar import DebugToolbarExtension
+from flask_httpauth import HTTPBasicAuth
 from config import config
 
 
-pymongo = PyMongo()
+debugtool = DebugToolbarExtension()
+mongo = MongoEngine()
+basic_auth = HTTPBasicAuth()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -22,7 +25,8 @@ def create_app(config_name):
                              'GET,PUT,POST,DELETE')
         return response
 
-    pymongo.init_app(app)
+    debugtool.init_app(app)
+    mongo.init_app(app)
 
     from .main import main as main_blueprint
 
