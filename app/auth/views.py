@@ -19,6 +19,8 @@ def new_user():
     except User.DoesNotExist:
         user = User(username=username)
         user.hash_password(password)
+        user.active_date = datetime.now()
+        user.active = True
         user.save()
     return jsonify({'username':user.username})
 
