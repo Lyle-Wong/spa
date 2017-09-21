@@ -3,6 +3,7 @@ from flask import g, request, abort, jsonify
 
 from . import auth
 from .models import User
+from datetime import datetime
 
 from app import http_auth
 
@@ -33,4 +34,7 @@ def get_user(username):
 @http_auth.login_required
 def get_auth_token():
     token = g.user.generate_auth_token()
+    user = g.user
+    user.last_active = datetime.now()
+    user.save()
     return jsonify({'token':token.decode('ascii')})
