@@ -2,18 +2,18 @@
 from flask import g, request, abort, jsonify
 
 from . import auth
-from models import User
+from .models import User
 
 from app import http_auth
 
-@auth.route('/users', methods=['POST'])
+@auth.route('/users/', methods=['POST'])
 def new_user():
     username = request.json.get('username')
     password = request.json.get('password')
     if username is None or password is None:
         abort(400)
     try:
-        User.obejcts.get(username=username)
+        User.objects.get(username=username)
         abort(400)
     except User.DoesNotExist:
         user = User(username=username)
@@ -21,16 +21,16 @@ def new_user():
         user.save()
     return jsonify({'username':user.username})
 
-@app.route('/users/<id>')
-def get_user(id):
-    user = User.objects.get(id)
+@auth.route('/users/<username>/')
+def get_user(username):
+    user = User.objects.get(username=username)
     if not user:
         abort(400)
-    return jsonify({'username':user.username})
+    return jsonify(user)
 
 
-@app.route('/token')
+@auth.route('/token/')
 @http_auth.login_required
 def get_auth_token():
-    token = g.user.get_auth_token()
+    token = g.user.generate_auth_token()
     return jsonify({'token':token.decode('ascii')})

@@ -5,6 +5,7 @@ import json
 from bson import json_util
 from flask import abort, g, jsonify
 from flask_restful import Resource
+from app import http_auth
 
 
 from . import main_api, main
@@ -13,7 +14,7 @@ from .models import Navigator
 
 class Navigation(Resource):
 
-    @login_required
+    @http_auth.login_required
     def get(self):
         data = Navigator.objects.all()
         if not data:
